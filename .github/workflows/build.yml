@@ -12,11 +12,11 @@ jobs:
       matrix:
         include:
           - target: x86_64-unknown-linux-gnu
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: false
             file-ext: ""
           - target: x86_64-unknown-linux-musl
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: x86_64-pc-windows-msvc
@@ -24,7 +24,7 @@ jobs:
             cross: false
             file-ext: .exe
           - target: x86_64-pc-windows-gnu
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: .exe
           - target: x86_64-apple-darwin
@@ -32,15 +32,15 @@ jobs:
             cross: false
             file-ext: ""
           - target: x86_64-linux-android
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: aarch64-unknown-linux-gnu
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: aarch64-unknown-linux-musl
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: aarch64-apple-darwin
@@ -48,7 +48,7 @@ jobs:
             cross: true
             file-ext: ""
           - target: aarch64-linux-android
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: aarch64-apple-ios
@@ -56,44 +56,44 @@ jobs:
             cross: true
             file-ext: ""
           - target: armv7-unknown-linux-gnueabi
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: armv7-unknown-linux-gnueabihf
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: armv7-unknown-linux-musleabi
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: armv7-unknown-linux-musleabihf
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: arm-unknown-linux-gnueabi
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: arm-unknown-linux-gnueabihf
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: arm-unknown-linux-musleabi
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: arm-unknown-linux-musleabihf
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
           - target: armv7-linux-androideabi
-            os: ubuntu-20.04
+            os: ubuntu-latest
             cross: true
             file-ext: ""
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: install toolchain
         uses: actions-rs/toolchain@v1
         with:
@@ -112,7 +112,7 @@ jobs:
           cd build-${{ matrix.target }}
           tar -C ../target/${{ matrix.target }}/release -zcf kaminari-${{ matrix.target }}.tar.gz kaminaris${{ matrix.file-ext }} kaminaric${{ matrix.file-ext }}
       - name: upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: kaminari-${{ matrix.target }}.tar.gz
           path: build-${{ matrix.target }}/kaminari-${{ matrix.target }}.tar.gz
